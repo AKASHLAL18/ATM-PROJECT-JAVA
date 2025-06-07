@@ -1,0 +1,57 @@
+package newt;
+import java.util.Scanner;
+public class ATM {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+        BankAccount account = new BankAccount();
+        System.out.print("Enter your PIN: ");
+        int inputPin = sc.nextInt();
+
+        if (account.checkPin(inputPin)) {
+            while (true) {
+                System.out.println("\n--- ATM Menu ---");
+                System.out.println("1. Check Balance");
+                System.out.println("2. Deposit Money");
+                System.out.println("3. Withdraw Money");
+                System.out.println("4. Print Receipt");
+                System.out.println("5. Exit");
+                System.out.print("Choose an option: ");
+
+                int choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Your current balance is: " + account.getBalance());
+                        break;
+                    case 2:
+                        System.out.print("Enter amount to deposit: ");
+                        int depositAmount = sc.nextInt();
+                        account.deposit(depositAmount);
+                        break;
+                    case 3:
+                        System.out.print("Enter amount to withdraw: ");
+                        int withdrawAmount = sc.nextInt();
+                        account.withdraw(withdrawAmount);
+                        break;
+                    case 4:
+                        account.printReceipt();
+                        break;
+                    case 5:
+                        System.out.println("Thank you! Visit again.");
+                        sc.close();
+                        return;
+                    default:
+                        System.out.println("Invalid option. Please select between 1 to 5.");
+                }
+            }
+        } else {
+            System.out.println("Incorrect PIN. Access denied.");
+        }
+        sc.close();
+
+	}
+
+}
+
